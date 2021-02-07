@@ -7,10 +7,7 @@ public class Simulaattori {
 
 	public static void main(String[] args) {
 		
-		Trace.setTraceLevel(Level.INFO);
-		Moottori m = new OmaMoottori();
-		m.setSimulointiaika(1000);
-		m.aja();
+		System.out.println("Toimii");
 		
 		
 
