@@ -12,13 +12,13 @@ import simu.framework.Tapahtumalista;
 public class Palvelupiste {
 
 	private LinkedList<Asiakas> jono = new LinkedList<Asiakas>(); // Tietorakennetoteutus
-	
+
 	private ContinuousGenerator generator;
 	private Tapahtumalista tapahtumalista;
-	private TapahtumanTyyppi skeduloitavanTapahtumanTyyppi; 
-	
+	private TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
+
 	//JonoStartegia strategia; //optio: asiakkaiden järjestys
-	
+
 	private boolean varattu = false;
 
 
@@ -26,13 +26,16 @@ public class Palvelupiste {
 		this.tapahtumalista = tapahtumalista;
 		this.generator = generator;
 		this.skeduloitavanTapahtumanTyyppi = tyyppi;
-				
+
+	}
+
+	public Palvelupiste() {
 	}
 
 
 	public void lisaaJonoon(Asiakas a){   // Jonon 1. asiakas aina palvelussa
 		jono.add(a);
-		
+
 	}
 
 	public Asiakas otaJonosta(){  // Poistetaan palvelussa ollut

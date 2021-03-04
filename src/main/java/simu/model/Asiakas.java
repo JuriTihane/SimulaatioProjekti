@@ -1,7 +1,7 @@
 package simu.model;
 
-import simu.framework.Kello;
-import simu.framework.Trace;
+import simu.framework.*;
+import java.util.Random;
 
 
 // TODO:
@@ -12,10 +12,15 @@ public class Asiakas {
 	private int id;
 	private static int i = 1;
 	private static long sum = 0;
-	
+	private int bussiNumero;
+	Random random;
+
+
+
 	public Asiakas(){
-	    id = i++;
-	    
+		id = i++;
+		random = new Random();
+		bussiNumero = random.nextInt(OmaMoottori.bussienMaara -1);
 		saapumisaika = Kello.getInstance().getAika();
 		Trace.out(Trace.Level.INFO, "Uusi asiakas:" + id + ":"+saapumisaika);
 	}
@@ -35,7 +40,11 @@ public class Asiakas {
 	public void setSaapumisaika(double saapumisaika) {
 		this.saapumisaika = saapumisaika;
 	}
-	
+
+	public int getBussiNumero(){
+		return bussiNumero;
+	}
+
 	public void raportti(){
 		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " saapui:" +saapumisaika);
 		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " poistui:" +poistumisaika);

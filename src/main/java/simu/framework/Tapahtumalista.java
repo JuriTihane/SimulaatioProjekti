@@ -1,6 +1,9 @@
 package simu.framework;
 
 import java.util.PriorityQueue;
+import simu.framework.*;
+import simu.model.*;
+
 
 public class Tapahtumalista {
 	private PriorityQueue<Tapahtuma> lista = new PriorityQueue<Tapahtuma>();
