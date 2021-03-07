@@ -16,6 +16,10 @@ public class Tapahtumalista {
 		Trace.out(Trace.Level.INFO,"Tapahtumalistasta poisto " + lista.peek());
 		return lista.remove();
 	}
+
+	public void lisaaBussiTapahtumia (Tapahtuma t){
+		lisaa(t);
+	}
 	
 	public void lisaa(Tapahtuma t){
 		lista.add(t);

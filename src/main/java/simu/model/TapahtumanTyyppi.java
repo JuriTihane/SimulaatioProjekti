@@ -5,5 +5,7 @@ package simu.model;
 public enum TapahtumanTyyppi {
 	ARR1,
 	DEP1,
+	BUSARR,
+	BUSDEP,
 
 }
