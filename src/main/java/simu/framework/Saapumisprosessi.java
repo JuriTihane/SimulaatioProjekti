@@ -19,13 +19,11 @@ public class Saapumisprosessi {
 		Tapahtuma t = new Tapahtuma(tyyppi, Kello.getInstance().getAika()+generaattori.sample());
 		tapahtumalista.lisaa(t);
 	}
+
 	public void generoiSeuraavaBussi(){
 		Tapahtuma t = new Tapahtuma(tyyppi, Kello.getInstance().getAika() + generaattori.sample());
 		tapahtumalista.lisaa(t);
 		Tapahtuma lahto = new Tapahtuma(TapahtumanTyyppi.BUSDEP, Kello.getInstance().getAika() + generaattori.sample() + lahdonViivastys.sample());
 		tapahtumalista.lisaa(lahto);
-
 	}
-
-
 }

@@ -12,9 +12,5 @@ public class Simulaattori {
 		m.setSimulointiaika(1000);
 		m.aja();
 		System.out.println("Toimii");
-		
-		
-
 	}
-
 }

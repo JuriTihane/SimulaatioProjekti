@@ -14,12 +14,11 @@ import simu.framework.Tapahtumalista;
 public class Palvelupiste {
 
 	private LinkedList<Asiakas> jono = new LinkedList<Asiakas>(); // Tietorakennetoteutus
-	private int kapasiteetti = 1;
+	private int kapasiteetti = 10;
 	private int matkustajat = 0;
 	private double aikavali = 15;
-
 	private boolean valmisLahtoon = false;
-
+	private boolean varattu = false;
 	private ContinuousGenerator generator;
 	private Tapahtumalista tapahtumalista;
 	private TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
@@ -39,47 +38,38 @@ public class Palvelupiste {
 
 
 	 */
-	private boolean varattu = false;
-
 
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi){
 		this.tapahtumalista = tapahtumalista;
 		this.generator = generator;
 		this.skeduloitavanTapahtumanTyyppi = tyyppi;
-
 	}
 
-	// getterit ja setterit
 	public boolean getValmisLahtoon(){
 		return valmisLahtoon;
 	}
+
 	public void setValmisLahtoon(boolean valmisLahtoon){
 		this.valmisLahtoon = valmisLahtoon;
 	}
 
-	public Palvelupiste() {
-	}
-
-
-
 	public void lisaaJonoon(Asiakas a){ // Jonon 1. asiakas aina palvelussa
-
 		jono.add(a);
-
+		if (matkustajat == kapasiteetti) {
+			setValmisLahtoon(true);
+		} else {
+			matkustajat++;
+			System.out.println(matkustajat);
+		}
 	}
 
 	public Asiakas otaJonosta(){  // Poistetaan palvelussa ollut
-
-
-
 		varattu = false;
 		return jono.poll();
 	}
 
-
 	public void aloitaPalvelu(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
 		varattu = true;
-
 		double palveluaika = generator.sample();
 		tapahtumalista.lisaa(new Tapahtuma(skeduloitavanTapahtumanTyyppi,Kello.getInstance().getAika()+palveluaika));
 	}
@@ -88,11 +78,9 @@ public class Palvelupiste {
 		this.kapasiteetti = uusikapasiteetti;
 	}
 
-
 	public boolean onVarattu(){
 		return varattu;
 	}
-
 
 	public boolean onJonossa(){
 		return jono.size() != 0;
@@ -101,5 +89,4 @@ public class Palvelupiste {
 	public void bussinLahtoRaportti(){
 		System.out.println("Bussi lähti laiturilta kello " + Kello.getInstance().getAika());
 	}
-
 }

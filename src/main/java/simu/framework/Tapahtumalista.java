@@ -6,14 +6,15 @@ import simu.model.*;
 
 
 public class Tapahtumalista {
+
 	private PriorityQueue<Tapahtuma> lista = new PriorityQueue<Tapahtuma>();
-	
+
 	public Tapahtumalista(){
 	 
 	}
 	
 	public Tapahtuma poista(){
-		Trace.out(Trace.Level.INFO,"Tapahtumalistasta poisto " + lista.peek());
+		//Trace.out(Trace.Level.INFO,"Tapahtumalistasta poisto " + lista.peek());
 		return lista.remove();
 	}
 
@@ -28,6 +29,4 @@ public class Tapahtumalista {
 	public double getSeuraavanAika(){
 		return lista.peek().getAika();
 	}
-	
-	
 }
