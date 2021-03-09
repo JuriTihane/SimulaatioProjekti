@@ -17,9 +17,7 @@ public class Palvelupiste {
 	private int kapasiteetti = 1;
 	private int matkustajat = 0;
 	private double aikavali = 15;
-	private ContinuousGenerator lahdonViivastys = new Normal(3,1);
-	private int bussiNumero = 0;
-	private static int i = 0;
+
 	private boolean valmisLahtoon = false;
 
 	private ContinuousGenerator generator;
@@ -43,9 +41,6 @@ public class Palvelupiste {
 	 */
 	private boolean varattu = false;
 
-	public static void kasvataBussiNumeroa(){
-		i++;
-	}
 
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi){
 		this.tapahtumalista = tapahtumalista;
@@ -53,6 +48,8 @@ public class Palvelupiste {
 		this.skeduloitavanTapahtumanTyyppi = tyyppi;
 
 	}
+
+	// getterit ja setterit
 	public boolean getValmisLahtoon(){
 		return valmisLahtoon;
 	}
@@ -73,32 +70,11 @@ public class Palvelupiste {
 
 	public Asiakas otaJonosta(){  // Poistetaan palvelussa ollut
 
-		/*
-		if (matkustajat == kapasiteetti){
-			bussiOnValmisLahtoon = true;
-			bussiEdesTakaisin();
-		}
 
-
-		this.matkustajat++;
-		*/
 
 		varattu = false;
 		return jono.poll();
 	}
-
-	public void bussiEdesTakaisin(){
-		double x = Kello.getInstance().getAika() + aikavali + lahdonViivastys.sample();
-		System.out.println("Bussi lähtee");
-
-		while (x != Kello.getInstance().getAika()){
-
-			matkustajat = 0;
-
-		}
-
-	}
-
 
 
 	public void aloitaPalvelu(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
@@ -120,6 +96,10 @@ public class Palvelupiste {
 
 	public boolean onJonossa(){
 		return jono.size() != 0;
+	}
+
+	public void bussinLahtoRaportti(){
+		System.out.println("Bussi lähti laiturilta kello " + Kello.getInstance().getAika());
 	}
 
 }

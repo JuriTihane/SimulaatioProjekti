@@ -3,11 +3,9 @@ package simu.model;
 import eduni.distributions.ContinuousGenerator;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
-import simu.framework.Kello;
-import simu.framework.Moottori;
-import simu.framework.Saapumisprosessi;
-import simu.framework.Tapahtuma;
+import simu.framework.*;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class OmaMoottori extends Moottori{
@@ -16,8 +14,10 @@ public class OmaMoottori extends Moottori{
 	public static int bussienMaara = 8;
 	private Saapumisprosessi bussiSaapumisprosessi;
 	private Saapumisprosessi saapumisprosessi;
+	private Saapumisprosessi bussiLahtoprosessi;
 	private ContinuousGenerator bussiGeneraattori = new Normal(20,1);
-
+	private ContinuousGenerator lahdonViivastys = new Normal(3,1);
+	private LinkedList<Palvelupiste> prioriteettiJonoPalvelupisteille = new LinkedList<Palvelupiste>();
 	Random random;
 
 
@@ -43,13 +43,14 @@ public class OmaMoottori extends Moottori{
 		saapumisprosessi = new Saapumisprosessi(new Negexp(1,5), tapahtumalista, TapahtumanTyyppi.ARR1);
 		bussiSaapumisprosessi = new Saapumisprosessi(new Normal(20,1.5), tapahtumalista, TapahtumanTyyppi.BUSARR);
 
+		bussiLahtoprosessi = new Saapumisprosessi(new Normal(3,1),tapahtumalista, TapahtumanTyyppi.BUSDEP);
 	}
 
 
 	@Override
 	protected void alustukset() {
 		saapumisprosessi.generoiSeuraava(); // Ensimmäinen saapuminen järjestelmään
-		bussiSaapumisprosessi.generoiSeuraava();
+		bussiSaapumisprosessi.generoiSeuraavaBussi();
 	}
 
 	@Override
@@ -61,14 +62,28 @@ public class OmaMoottori extends Moottori{
 			case ARR1: palvelupisteet[a.getBussiNumero()].lisaaJonoon(a);
 				saapumisprosessi.generoiSeuraava();
 				break;
-			case DEP1: palvelupisteet[a.getBussiNumero()].otaJonosta();
-				a.setPoistumisaika(Kello.getInstance().getAika());
-				a.raportti();
+			case DEP1:
+				if (palvelupisteet[a.getBussiNumero()].getValmisLahtoon() == false){
+					palvelupisteet[a.getBussiNumero()].otaJonosta();
+					a.setPoistumisaika(Kello.getInstance().getAika());
+					a.raportti();
+				}
+
 			case BUSARR: Tapahtuma i = new Tapahtuma(TapahtumanTyyppi.BUSARR, Kello.getInstance().getAika() + bussiGeneraattori.sample());
+				palvelupisteet[a.getBussiNumero()].setValmisLahtoon(false);
+				System.out.println("Bussi on pysäkillä");
+				prioriteettiJonoPalvelupisteille.add(palvelupisteet[a.getBussiNumero()]);
+				bussiLahtoprosessi.generoiSeuraava();
+			case BUSDEP:
+				try {
+					prioriteettiJonoPalvelupisteille.getFirst().setValmisLahtoon(true);
+				} catch (Exception NoSuchElementException){
+					System.out.println("Ei busseja listassa");
+				}
 
+				//palvelupisteet[a.getBussiNumero()].setValmisLahtoon(true);
+				prioriteettiJonoPalvelupisteille.poll();
 				System.out.println("Bussi lähtee");
-
-
 		}
 	}
 	@Override
