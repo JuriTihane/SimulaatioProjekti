@@ -11,7 +11,7 @@ public class Asiakas {
 	private double saapumisaika;
 	private double poistumisaika;
 	private int bussiNumero;
-	private int id = 0;
+	private static int id = 0;
 
 	public Asiakas(){
 		id++;
@@ -25,6 +25,9 @@ public class Asiakas {
 
 	public int getBussiNumero(){
 		return bussiNumero;
+	}
+	public static int getId(){
+		return id;
 	}
 
 	public void raportti(){

@@ -14,9 +14,11 @@ import simu.framework.Tapahtumalista;
 public class Palvelupiste {
 
 	private LinkedList<Asiakas> jono = new LinkedList<Asiakas>(); // Tietorakennetoteutus
-	private int kapasiteetti = 10;
+	private int kapasiteetti = 20;
 	private int matkustajat = 0;
 	private double aikavali = 15;
+	//Tsekkaa onko bussi edes pysäkille ja estää bussin lähteminen ennen kuin se on tullut laiturille
+	private boolean onPysakilla = false;
 	private boolean valmisLahtoon = false;
 	private boolean varattu = false;
 	private ContinuousGenerator generator;
@@ -45,12 +47,25 @@ public class Palvelupiste {
 		this.skeduloitavanTapahtumanTyyppi = tyyppi;
 	}
 
+
+	public int getMatkustajat(){
+		return this.matkustajat;
+	}
+	public void setMatkustajat(int uusiArvo){
+		this.matkustajat = uusiArvo;
+	}
 	public boolean getValmisLahtoon(){
 		return valmisLahtoon;
 	}
 
 	public void setValmisLahtoon(boolean valmisLahtoon){
 		this.valmisLahtoon = valmisLahtoon;
+	}
+	public void setOnPysakilla(boolean onPysakilla){
+		this.onPysakilla = onPysakilla;
+	}
+	public boolean getOnPysakilla(){
+		return onPysakilla;
 	}
 
 	public void lisaaJonoon(Asiakas a){ // Jonon 1. asiakas aina palvelussa
@@ -74,7 +89,7 @@ public class Palvelupiste {
 		tapahtumalista.lisaa(new Tapahtuma(skeduloitavanTapahtumanTyyppi,Kello.getInstance().getAika()+palveluaika));
 	}
 
-	public void muutaKapasiteettia (int uusikapasiteetti){
+	public void setKapasiteettia (int uusikapasiteetti){
 		this.kapasiteetti = uusikapasiteetti;
 	}
 

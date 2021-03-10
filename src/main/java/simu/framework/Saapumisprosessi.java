@@ -7,7 +7,7 @@ public class Saapumisprosessi {
 	private ContinuousGenerator generaattori;
 	private Tapahtumalista tapahtumalista;
 	private TapahtumanTyyppi tyyppi;
-	private ContinuousGenerator lahdonViivastys = new Normal(3,1);
+	private ContinuousGenerator lahdonViivastys = new Normal(3,2);
 
 	public Saapumisprosessi(ContinuousGenerator g, Tapahtumalista tl, TapahtumanTyyppi tyyppi){
 		this.generaattori = g;
