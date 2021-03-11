@@ -7,32 +7,35 @@ import eduni.distributions.Normal;
 import simu.framework.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class OmaMoottori extends Moottori{
 
 	public static int matkustajienMaara;
-	public static int bussienMaara = 5;
+	public static int bussienMaara;
 	private Saapumisprosessi bussiSaapumisprosessi;
 	private Saapumisprosessi saapumisprosessi;
 	private Saapumisprosessi bussiLahtoprosessi;
+	private ContinuousGenerator bussiGeneraattori = new Normal(5,1);
 	private ContinuousGenerator lahdonViivastys = new Normal(3,1);
 	private LinkedList<Palvelupiste> prioriteettiJonoPalvelupisteille = new LinkedList<Palvelupiste>();
 
 
 
-	public OmaMoottori(){
+	public OmaMoottori(int bussienMaara){
+		OmaMoottori.bussienMaara = bussienMaara;
+
 		// Annetaan arraylle bussienMaara koon
 		palvelupisteet = new Palvelupiste[bussienMaara];
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA"+ Arrays.toString(palvelupisteet));
+
 		// Luodaan tapahtumatyyppiä DEP1 bussienMaara verran palvelupisteitä eli busseja terminaalia varten
-
-		palvelupisteet[0] = new Palvelupiste(new Normal(5,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
-		palvelupisteet[1] = new Palvelupiste(new Normal(10,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
-		palvelupisteet[2] = new Palvelupiste(new Normal(15,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
-		palvelupisteet[3] = new Palvelupiste(new Normal(30,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
-		palvelupisteet[4] = new Palvelupiste(new Normal(20,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
-
+		for (int i = 0 ; i < palvelupisteet.length; i++){
+			palvelupisteet[i] = new Palvelupiste(new Normal(ThreadLocalRandom.current().nextInt(5, 30 + 1),1),tapahtumalista,TapahtumanTyyppi.DEP1);
+		}
 
 		saapumisprosessi = new Saapumisprosessi(new Negexp(0.1,5), tapahtumalista, TapahtumanTyyppi.ARR1);
 		bussiSaapumisprosessi = new Saapumisprosessi(new Normal(3,0.5), tapahtumalista, TapahtumanTyyppi.BUSARR);
@@ -119,5 +122,9 @@ public class OmaMoottori extends Moottori{
 //		for (int i = 0; i < palvelupisteet.length; i++) {
 //			System.out.println(palvelupisteet[i].);
 //		}
+	}
+
+	public String tuloksetGUI() {
+		return "Asiakkaita yhteensä: " + Asiakas.getId();
 	}
 }
