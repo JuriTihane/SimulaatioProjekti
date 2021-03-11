@@ -29,7 +29,7 @@ public abstract class Moottori {
 		tulokset();
 	}
 
-	private void suoritaBTapahtumat(){
+	private void suoritaBTapahtumat() {
 		while (tapahtumalista.getSeuraavanAika() == kello.getAika()){
 			suoritaTapahtuma(tapahtumalista.poista());
 		}

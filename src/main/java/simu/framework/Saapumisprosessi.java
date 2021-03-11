@@ -16,14 +16,14 @@ public class Saapumisprosessi {
 	}
 
 	public void generoiSeuraava(){
-		Tapahtuma t = new Tapahtuma(tyyppi, Kello.getInstance().getAika()+generaattori.sample());
+		Tapahtuma t = new Tapahtuma(tyyppi, (Kello.getInstance().getAika() + generaattori.sample()));
 		tapahtumalista.lisaa(t);
 	}
 
-	public void generoiSeuraavaBussi(){
-		Tapahtuma t = new Tapahtuma(tyyppi, Kello.getInstance().getAika() + generaattori.sample());
+	public void generoiSeuraavaBussi() {
+		Tapahtuma t = new Tapahtuma(tyyppi, (Kello.getInstance().getAika() + generaattori.sample()));
 		tapahtumalista.lisaa(t);
-		Tapahtuma lahto = new Tapahtuma(TapahtumanTyyppi.BUSDEP, Kello.getInstance().getAika() + generaattori.sample() + lahdonViivastys.sample());
+		Tapahtuma lahto = new Tapahtuma(TapahtumanTyyppi.BUSDEP, (Kello.getInstance().getAika() + generaattori.sample() + lahdonViivastys.sample()));
 		tapahtumalista.lisaa(lahto);
 	}
 }

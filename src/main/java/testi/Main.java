@@ -91,7 +91,7 @@ public class Main extends Application {
 
             Scene scene = new Scene(stack, 700, 300); // Luo uuden scene jonka parametri on HBox nimeltään root ja asettaa leveyden ja korkeuden
             primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
+            primaryStage.setResizable(false); // Hotfix
             primaryStage.show();
         } catch (Exception e) {
             // Jos jokin ei mene läpi, niin heittää stacktrace, eli virheet consoleen

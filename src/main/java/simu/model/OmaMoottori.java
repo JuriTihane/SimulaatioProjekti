@@ -1,15 +1,14 @@
 package simu.model;
 
 import eduni.distributions.ContinuousGenerator;
-import eduni.distributions.LogNormal;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
-import simu.framework.*;
+import simu.framework.Kello;
+import simu.framework.Moottori;
+import simu.framework.Saapumisprosessi;
+import simu.framework.Tapahtuma;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class OmaMoottori extends Moottori{
@@ -22,7 +21,8 @@ public class OmaMoottori extends Moottori{
 	private ContinuousGenerator bussiGeneraattori = new Normal(5,1);
 	private ContinuousGenerator lahdonViivastys = new Normal(3,1);
 	private LinkedList<Palvelupiste> prioriteettiJonoPalvelupisteille = new LinkedList<Palvelupiste>();
-	private double odotusAjat = 0;
+	private LinkedList<Double> test = new LinkedList<Double>();
+	private double odotusAjat;
 
 
 	public OmaMoottori(int bussienMaara, int bussienKapasiteetti){
@@ -71,13 +71,14 @@ public class OmaMoottori extends Moottori{
 					// Asettaa asiakkaalle poistumis ajan
 					a.setPoistumisaika(Kello.getInstance().getAika());
 					odotusAjat = odotusAjat + (a.getPoistumisaika() - a.getSaapumisaika());
+					System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + a.getSaapumisaika());
+					System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + a.getPoistumisaika());
 					// Asiakkaan raportti
 					a.raportti();
 				}
 
-
 			// Jos BUSARR niin luo uuden tapahtuman tyyppiä BUSARR
-			case BUSARR: Tapahtuma i = new Tapahtuma(TapahtumanTyyppi.BUSDEP, Kello.getInstance().getAika() + lahdonViivastys.sample());
+			case BUSARR:
 				// Asettaa asiakkaan "haluaman" palvelupisteelle valmi lahtoon false
 				palvelupisteet[a.getBussiNumero()].setValmisLahtoon(false);
 				System.out.println("Bussi " + a.getBussiNumero() + " on pysäkillä" + Kello.getInstance().getAika());
@@ -85,13 +86,11 @@ public class OmaMoottori extends Moottori{
 				prioriteettiJonoPalvelupisteille.add(palvelupisteet[a.getBussiNumero()]);
 				prioriteettiJonoPalvelupisteille.get(0).setOnPysakilla(true);
 				prioriteettiJonoPalvelupisteille.add(palvelupisteet[a.getBussiNumero()]);
-				//System.out.println("Lisätty");
 				// Generoi uuden tapahtuman saapumisprosessille bussilahtoprosessi ja lisää sitä tapahtumalistan "lista" priorityqueuen arraylist
 				bussiLahtoprosessi.generoiSeuraavaBussi();
 
 			// Jos BUSDEP
 			case BUSDEP:
-
 				if (prioriteettiJonoPalvelupisteille.get(0).getOnPysakilla()){
 					try {
 						prioriteettiJonoPalvelupisteille.get(0).setValmisLahtoon(true);
@@ -101,13 +100,14 @@ public class OmaMoottori extends Moottori{
 					}
 					// Joka tapauksessa asettaa asiakkaan "haluaman" palvelupisteelle valmis lahtoon true
 					palvelupisteet[a.getBussiNumero()].setValmisLahtoon(true);
-					System.out.println("Bussi " + a.getBussiNumero() +" lähtee " + palvelupisteet[a.getBussiNumero()].getMatkustajat() + " " + Kello.getInstance().getAika());
+					System.out.println("Bussi " + a.getBussiNumero() +" lähtee " + palvelupisteet[a.getBussiNumero()].getMatkustajat() + ", " + Kello.getInstance().getAika());
+					test.add((double) palvelupisteet[a.getBussiNumero()].getMatkustajat());
+					System.out.println(test.size());
 					prioriteettiJonoPalvelupisteille.get(0).setOnPysakilla(false);
 					palvelupisteet[a.getBussiNumero()].setMatkustajat(0);
 					// Ottaa ensimmäisen indexin ja poistaa sen
 					prioriteettiJonoPalvelupisteille.poll();
 				}
-
 		}
 	}
 
@@ -117,14 +117,16 @@ public class OmaMoottori extends Moottori{
 		System.out.println("Keskimääräinen odotusaika asiakkailla " + (double)Asiakas.getId() / odotusAjat);
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
 		System.out.println("Tulokset ... puuttuvat vielä");
-		// TODO: Palveltujen asiakkaiden määrä palvelupisteessä
-		// TODO: Terminaalin kokonaisasiakasmäärä
-//		for (int i = 0; i < palvelupisteet.length; i++) {
-//			System.out.println(palvelupisteet[i].);
-//		}
 	}
 
 	public String tuloksetGUI() {
-		return "Asiakkaita yhteensä: " + Asiakas.getId();
+		double keskimaarainenMatkustajatBussi = 0;
+		for (int i = 0; i < test.size(); i++) {
+			keskimaarainenMatkustajatBussi += test.get(i);
+			System.out.println(test.get(i));
+		}
+		return "Asiakkaita yhteensä: " + Asiakas.getId() + "\n"
+				+ "Keskimääräinen matkustajien luku / laituri: " + (double)Asiakas.getId() / palvelupisteet.length + "\n"
+				+ "Keskimääräinen matkustajien luku / bussi: " + keskimaarainenMatkustajatBussi / test.size();
 	}
 }

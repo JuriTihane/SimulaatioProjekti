@@ -2,6 +2,7 @@ package simu.model;
 
 import simu.framework.*;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 // TODO:
@@ -20,7 +21,15 @@ public class Asiakas {
 	}
 
 	public void setPoistumisaika(double poistumisaika) {
-		this.poistumisaika = poistumisaika;
+		this.poistumisaika = poistumisaika + ThreadLocalRandom.current().nextDouble(1, 10);
+	}
+
+	public double getPoistumisaika() {
+		return poistumisaika;
+	}
+
+	public double getSaapumisaika() {
+		return saapumisaika;
 	}
 
 	public int getBussiNumero(){
@@ -30,7 +39,7 @@ public class Asiakas {
 		return id;
 	}
 
-	public void raportti(){
-		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " läpimenoaika:" + (poistumisaika - saapumisaika));
+	public void raportti() {
+		System.out.println("Asiakas "+id+ " läpimenoaika:" + (poistumisaika - saapumisaika));
 	}
 }
