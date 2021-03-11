@@ -71,8 +71,6 @@ public class OmaMoottori extends Moottori{
 					// Asettaa asiakkaalle poistumis ajan
 					a.setPoistumisaika(Kello.getInstance().getAika());
 					odotusAjat = odotusAjat + (a.getPoistumisaika() - a.getSaapumisaika());
-					System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + a.getSaapumisaika());
-					System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB" + a.getPoistumisaika());
 					// Asiakkaan raportti
 					a.raportti();
 				}
@@ -102,7 +100,6 @@ public class OmaMoottori extends Moottori{
 					palvelupisteet[a.getBussiNumero()].setValmisLahtoon(true);
 					System.out.println("Bussi " + a.getBussiNumero() +" lähtee " + palvelupisteet[a.getBussiNumero()].getMatkustajat() + ", " + Kello.getInstance().getAika());
 					test.add((double) palvelupisteet[a.getBussiNumero()].getMatkustajat());
-					System.out.println(test.size());
 					prioriteettiJonoPalvelupisteille.get(0).setOnPysakilla(false);
 					palvelupisteet[a.getBussiNumero()].setMatkustajat(0);
 					// Ottaa ensimmäisen indexin ja poistaa sen

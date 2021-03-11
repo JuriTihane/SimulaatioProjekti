@@ -44,7 +44,6 @@ public class Palvelupiste {
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi, int kapasiteetti){
 		this.tapahtumalista = tapahtumalista;
 		this.generator = generator;
-		System.out.println("EEEEEEEEEEEEEEEEEEE" + generator.toString());
 		this.skeduloitavanTapahtumanTyyppi = tyyppi;
 		this.kapasiteetti = kapasiteetti;
 	}
