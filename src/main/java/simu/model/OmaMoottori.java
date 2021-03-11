@@ -22,7 +22,7 @@ public class OmaMoottori extends Moottori{
 	private ContinuousGenerator bussiGeneraattori = new Normal(5,1);
 	private ContinuousGenerator lahdonViivastys = new Normal(3,1);
 	private LinkedList<Palvelupiste> prioriteettiJonoPalvelupisteille = new LinkedList<Palvelupiste>();
-
+	private double odotusAjat = 0;
 
 
 	public OmaMoottori(int bussienMaara, int bussienKapasiteetti){
@@ -70,6 +70,7 @@ public class OmaMoottori extends Moottori{
 					palvelupisteet[a.getBussiNumero()].otaJonosta();
 					// Asettaa asiakkaalle poistumis ajan
 					a.setPoistumisaika(Kello.getInstance().getAika());
+					odotusAjat = odotusAjat + (a.getPoistumisaika() - a.getSaapumisaika());
 					// Asiakkaan raportti
 					a.raportti();
 				}
@@ -86,11 +87,11 @@ public class OmaMoottori extends Moottori{
 				prioriteettiJonoPalvelupisteille.add(palvelupisteet[a.getBussiNumero()]);
 				//System.out.println("Lisätty");
 				// Generoi uuden tapahtuman saapumisprosessille bussilahtoprosessi ja lisää sitä tapahtumalistan "lista" priorityqueuen arraylist
-				bussiLahtoprosessi.generoiSeuraava();
+				bussiLahtoprosessi.generoiSeuraavaBussi();
 
 			// Jos BUSDEP
 			case BUSDEP:
-				//
+
 				if (prioriteettiJonoPalvelupisteille.get(0).getOnPysakilla()){
 					try {
 						prioriteettiJonoPalvelupisteille.get(0).setValmisLahtoon(true);
@@ -113,7 +114,7 @@ public class OmaMoottori extends Moottori{
 	@Override
 	protected void tulokset() {
 		System.out.println("Kaikki asiakkaat yhteensä " + Asiakas.getId());
-
+		System.out.println("Keskimääräinen odotusaika asiakkailla " + (double)Asiakas.getId() / odotusAjat);
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
 		System.out.println("Tulokset ... puuttuvat vielä");
 		// TODO: Palveltujen asiakkaiden määrä palvelupisteessä
