@@ -14,7 +14,7 @@ import simu.framework.Tapahtumalista;
 public class Palvelupiste {
 
 	private LinkedList<Asiakas> jono = new LinkedList<Asiakas>(); // Tietorakennetoteutus
-	private int kapasiteetti = 20;
+	private int kapasiteetti = 30;
 	private int matkustajat = 0;
 	private double aikavali = 15;
 	//Tsekkaa onko bussi edes pysäkille ja estää bussin lähteminen ennen kuin se on tullut laiturille

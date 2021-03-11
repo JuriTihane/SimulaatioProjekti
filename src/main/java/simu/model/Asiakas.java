@@ -15,7 +15,7 @@ public class Asiakas {
 
 	public Asiakas(){
 		id++;
-		bussiNumero = new Random().nextInt(OmaMoottori.bussienMaara -1);
+		bussiNumero = new Random().nextInt(OmaMoottori.bussienMaara);
 		saapumisaika = Kello.getInstance().getAika();
 	}
 

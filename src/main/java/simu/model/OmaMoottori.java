@@ -13,11 +13,10 @@ import java.util.Random;
 public class OmaMoottori extends Moottori{
 
 	public static int matkustajienMaara;
-	public static int bussienMaara = 4;
+	public static int bussienMaara = 5;
 	private Saapumisprosessi bussiSaapumisprosessi;
 	private Saapumisprosessi saapumisprosessi;
 	private Saapumisprosessi bussiLahtoprosessi;
-	private ContinuousGenerator bussiGeneraattori = new Normal(5,1);
 	private ContinuousGenerator lahdonViivastys = new Normal(3,1);
 	private LinkedList<Palvelupiste> prioriteettiJonoPalvelupisteille = new LinkedList<Palvelupiste>();
 
@@ -25,14 +24,17 @@ public class OmaMoottori extends Moottori{
 
 	public OmaMoottori(){
 		// Annetaan arraylle bussienMaara koon
-		palvelupisteet = new Palvelupiste[bussienMaara - 1];
+		palvelupisteet = new Palvelupiste[bussienMaara];
 		// Luodaan tapahtumatyyppiä DEP1 bussienMaara verran palvelupisteitä eli busseja terminaalia varten
-		for (int i = 0 ; i < palvelupisteet.length; i++){
-			palvelupisteet[i] = new Palvelupiste(new Normal(10,1),tapahtumalista,TapahtumanTyyppi.DEP1);
-		}
+
+		palvelupisteet[0] = new Palvelupiste(new Normal(5,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
+		palvelupisteet[1] = new Palvelupiste(new Normal(10,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
+		palvelupisteet[2] = new Palvelupiste(new Normal(15,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
+		palvelupisteet[3] = new Palvelupiste(new Normal(30,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
+		palvelupisteet[4] = new Palvelupiste(new Normal(20,0.1),tapahtumalista,TapahtumanTyyppi.DEP1);
 
 
-		saapumisprosessi = new Saapumisprosessi(new Negexp(0.5,5), tapahtumalista, TapahtumanTyyppi.ARR1);
+		saapumisprosessi = new Saapumisprosessi(new Negexp(0.1,5), tapahtumalista, TapahtumanTyyppi.ARR1);
 		bussiSaapumisprosessi = new Saapumisprosessi(new Normal(3,0.5), tapahtumalista, TapahtumanTyyppi.BUSARR);
 		bussiLahtoprosessi = new Saapumisprosessi(new Normal(3,0.5),tapahtumalista, TapahtumanTyyppi.BUSDEP);
 	}
@@ -72,18 +74,15 @@ public class OmaMoottori extends Moottori{
 
 
 			// Jos BUSARR niin luo uuden tapahtuman tyyppiä BUSARR
-			case BUSARR: Tapahtuma i = new Tapahtuma(TapahtumanTyyppi.BUSDEP, Kello.getInstance().getAika() + bussiGeneraattori.sample());
+			case BUSARR: Tapahtuma i = new Tapahtuma(TapahtumanTyyppi.BUSDEP, Kello.getInstance().getAika() + lahdonViivastys.sample());
 				// Asettaa asiakkaan "haluaman" palvelupisteelle valmi lahtoon false
 				palvelupisteet[a.getBussiNumero()].setValmisLahtoon(false);
 				System.out.println("Bussi " + a.getBussiNumero() + " on pysäkillä" + Kello.getInstance().getAika());
 				// Lisää arrayyn asiakkaan "haluaman" palvelupisteen
 				prioriteettiJonoPalvelupisteille.add(palvelupisteet[a.getBussiNumero()]);
 				prioriteettiJonoPalvelupisteille.get(0).setOnPysakilla(true);
-				System.out.println(prioriteettiJonoPalvelupisteille.add(palvelupisteet[a.getBussiNumero()]));
-				System.out.println("Lisätty");
-				for (Palvelupiste ab : prioriteettiJonoPalvelupisteille){
-					System.out.println(ab.getMatkustajat());
-				}
+				prioriteettiJonoPalvelupisteille.add(palvelupisteet[a.getBussiNumero()]);
+				//System.out.println("Lisätty");
 				// Generoi uuden tapahtuman saapumisprosessille bussilahtoprosessi ja lisää sitä tapahtumalistan "lista" priorityqueuen arraylist
 				bussiLahtoprosessi.generoiSeuraava();
 
@@ -112,6 +111,7 @@ public class OmaMoottori extends Moottori{
 	@Override
 	protected void tulokset() {
 		System.out.println("Kaikki asiakkaat yhteensä " + Asiakas.getId());
+
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
 		System.out.println("Tulokset ... puuttuvat vielä");
 		// TODO: Palveltujen asiakkaiden määrä palvelupisteessä
