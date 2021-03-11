@@ -14,7 +14,7 @@ import simu.framework.Tapahtumalista;
 public class Palvelupiste {
 
 	private LinkedList<Asiakas> jono = new LinkedList<Asiakas>(); // Tietorakennetoteutus
-	private int kapasiteetti = 30;
+	private int kapasiteetti;
 	private int matkustajat = 0;
 	private double aikavali = 15;
 	//Tsekkaa onko bussi edes pysäkille ja estää bussin lähteminen ennen kuin se on tullut laiturille
@@ -41,10 +41,11 @@ public class Palvelupiste {
 
 	 */
 
-	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi){
+	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi, int kapasiteetti){
 		this.tapahtumalista = tapahtumalista;
 		this.generator = generator;
 		this.skeduloitavanTapahtumanTyyppi = tyyppi;
+		this.kapasiteetti = kapasiteetti;
 	}
 
 

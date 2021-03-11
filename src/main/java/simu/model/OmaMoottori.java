@@ -25,16 +25,15 @@ public class OmaMoottori extends Moottori{
 
 
 
-	public OmaMoottori(int bussienMaara){
+	public OmaMoottori(int bussienMaara, int bussienKapasiteetti){
 		OmaMoottori.bussienMaara = bussienMaara;
 
 		// Annetaan arraylle bussienMaara koon
 		palvelupisteet = new Palvelupiste[bussienMaara];
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA"+ Arrays.toString(palvelupisteet));
 
 		// Luodaan tapahtumatyyppiä DEP1 bussienMaara verran palvelupisteitä eli busseja terminaalia varten
 		for (int i = 0 ; i < palvelupisteet.length; i++){
-			palvelupisteet[i] = new Palvelupiste(new Normal(ThreadLocalRandom.current().nextInt(5, 30 + 1),1),tapahtumalista,TapahtumanTyyppi.DEP1);
+			palvelupisteet[i] = new Palvelupiste(new Normal(ThreadLocalRandom.current().nextInt(5, 30 + 1),1),tapahtumalista,TapahtumanTyyppi.DEP1, bussienKapasiteetti);
 		}
 
 		saapumisprosessi = new Saapumisprosessi(new Negexp(0.1,5), tapahtumalista, TapahtumanTyyppi.ARR1);

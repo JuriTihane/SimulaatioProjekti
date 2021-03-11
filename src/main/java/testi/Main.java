@@ -33,16 +33,22 @@ public class Main extends Application {
             primaryStage.setTitle("Bussiterminaali simulaatio"); // Asetetaan ohjelmalle title nimi
 
             // Simulointi ajan teksti
-            Text simulointiAikaText = new Text("Aseta simouloinnin ajan");
+            Text simulointiAikaText = new Text("Simuloinnin pituus");
             // Simulointi ajan fieldi
             TextField setSimulointiaika = new TextField("1000");
             setSimulointiaika.setMaxWidth(80);
 
             // Bussien määrä teksti
-            Text bussienMaaraText = new Text("Aseta bussien määrän");
+            Text bussienMaaraText = new Text("Bussien määrä");
             // Bussien määrä fieldi
             TextField setBussienMaara = new TextField("5");
             setBussienMaara.setMaxWidth(80);
+
+            // Bussien kapasiteetti teksti
+            Text bussienCapText = new Text("Bussien kapasiteetti");
+            // Bussien kapasiteetti fieldi
+            TextField setCapMaara = new TextField("30");
+            setCapMaara.setMaxWidth(80);
 
             // Textarea outputille
             TextArea ta = new TextArea();
@@ -56,13 +62,13 @@ public class Main extends Application {
             // onclick eventti napille
             buttonStart.setOnAction(actionEvent ->  {
                 Trace.setTraceLevel(Trace.Level.INFO); // https://docs.oracle.com/javase/7/docs/technotes/guides/jweb/jcp/tracing_logging.html#tracing
-                OmaMoottori m = new OmaMoottori(Integer.parseInt(setBussienMaara.getText())); // Luodaan uusi Omamoottori olio
+                OmaMoottori m = new OmaMoottori(Integer.parseInt(setBussienMaara.getText()), Integer.parseInt(setCapMaara.getText())); // Luodaan uusi Omamoottori olio
                 m.setSimulointiaika(Double.parseDouble(setSimulointiaika.getText())); // Asetetaan aika, kuinka kauan simulaatio juoksee
                 m.aja(); // OmaMoottori.aja
                 ta.setText(m.tuloksetGUI());
             });
 
-            StackPane stack = new StackPane(simulointiAikaText, setSimulointiaika, bussienMaaraText, setBussienMaara, ta, buttonStart);
+            StackPane stack = new StackPane(simulointiAikaText, setSimulointiaika, bussienMaaraText, setBussienMaara, bussienCapText, setCapMaara, ta, buttonStart);
 
             // Alignments
             StackPane.setAlignment(buttonStart, Pos.BOTTOM_RIGHT);
@@ -70,6 +76,8 @@ public class Main extends Application {
             StackPane.setAlignment(setSimulointiaika, Pos.TOP_LEFT);
             StackPane.setAlignment(bussienMaaraText, Pos.TOP_LEFT);
             StackPane.setAlignment(setBussienMaara, Pos.TOP_LEFT);
+            StackPane.setAlignment(bussienCapText, Pos.TOP_LEFT);
+            StackPane.setAlignment(setCapMaara, Pos.TOP_LEFT);
             StackPane.setAlignment(ta, Pos.TOP_RIGHT);
             // Margins
             StackPane.setMargin(buttonStart, new Insets(0, 10, 10, 0));
@@ -77,10 +85,13 @@ public class Main extends Application {
             StackPane.setMargin(setSimulointiaika, new Insets(30, 10, 10, 10));
             StackPane.setMargin(bussienMaaraText, new Insets(70, 10, 10, 10));
             StackPane.setMargin(setBussienMaara, new Insets(90, 10, 10, 10));
+            StackPane.setMargin(bussienCapText, new Insets(130, 10, 10, 10));
+            StackPane.setMargin(setCapMaara, new Insets(150, 10, 10, 10));
             StackPane.setMargin(ta, new Insets(10, 10, 10, 10));
 
             Scene scene = new Scene(stack, 700, 300); // Luo uuden scene jonka parametri on HBox nimeltään root ja asettaa leveyden ja korkeuden
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (Exception e) {
             // Jos jokin ei mene läpi, niin heittää stacktrace, eli virheet consoleen
