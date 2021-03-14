@@ -10,6 +10,7 @@ public class Tapahtuma implements Comparable<Tapahtuma> {
 	private double aika;
 
 	/**
+	 * Konstruktori
 	 * @param tyyppi Minkä tyyppinen tapahtuma luodaan
 	 * @param aika Tapahtuman aika
 	 */
@@ -19,22 +20,25 @@ public class Tapahtuma implements Comparable<Tapahtuma> {
 	}
 
 	/**
-	 * @return Palauttaa tapahtuman tyypin
+	 * Palauttaa tapahtuman tyypin
+	 * @return TapahtumaTyyppi
 	 */
 	public TapahtumanTyyppi getTyyppi() {
 		return tyyppi;
 	}
 
 	/**
-	 * @return Palauttaa tapahtuman ajan
+	 * Palauttaa tapahtuman ajan
+	 * @return aika
 	 */
 	public double getAika() {
 		return aika;
 	}
 
 	/**
+	 * Palauttaa -1 jos aika on pienempi kuin arg tapahtuman aika, palauttaa 1 jos toistenpäin ja 0 jos tarkistukset ei mene läpi.
 	 * @param arg Tapahtuma mihin verrataan
-	 * @return Palauttaa -1 jos aika on pienempi kuin arg tapahtuman aika, palauttaa 1 jos toistenpäin ja 0 jos tarkistukset ei mene läpi.
+	 * @return int
 	 */
 	@Override
 	public int compareTo(Tapahtuma arg) {

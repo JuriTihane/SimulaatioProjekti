@@ -16,7 +16,8 @@ public class Kello {
 	}
 
 	/**
-	 * @return Palauttaa kellon instanssin, jos instanssia ei ole olemassa niin luo uuden instanssin kellosta
+	 * Palauttaa kellon instanssin, jos instanssia ei ole olemassa niin luo uuden instanssin kellosta
+	 * @return instanssi
 	 */
 	public static Kello getInstance(){
 		if (instanssi == null){
@@ -26,14 +27,16 @@ public class Kello {
 	}
 
 	/**
-	 * @param aika asettaa uuden ajan jos sitä haluaa muuttaa
+	 * Asettaa uuden ajan jos sitä haluaa muuttaa
+	 * @param aika aika
 	 */
 	public void setAika(double aika){
 		this.aika = aika;
 	}
 
 	/**
-	 * @return Palauttaa ajan
+	 * Palauttaa ajan
+	 * @return aika
 	 */
 	public double getAika(){
 		return aika;

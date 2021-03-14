@@ -49,7 +49,8 @@ public class Palvelupiste {
 	}
 
 	/**
-	 * @return Palauttaa matkustajat muuttujan arvon
+	 * Palauttaa matkustajat muuttujan arvon
+	 * @return Matkustajien määrä
 	 */
 	public int getMatkustajat(){
 		return this.matkustajat;
@@ -64,7 +65,8 @@ public class Palvelupiste {
 	}
 
 	/**
-	 * @return Palauttaa valmisLahtoon muuttujan arvon
+	 * Palauttaa valmisLahtoon muuttujan arvon
+	 * @return ValmisLahtoon
 	 */
 	public boolean getValmisLahtoon(){
 		return valmisLahtoon;
@@ -87,7 +89,8 @@ public class Palvelupiste {
 	}
 
 	/**
-	 * @return Palauttaa onPysakilla arvon
+	 * Palauttaa onPysakilla arvon
+	 * @return onPysakilla
 	 */
 	public boolean getOnPysakilla(){
 		return onPysakilla;
@@ -133,13 +136,15 @@ public class Palvelupiste {
 	}
 
 	/**
-	 * @return Palauttaa varattu muuttjan arvon
+	 * Palauttaa varattu muuttjan arvon
+	 * @return varattu
 	 */
 	public boolean onVarattu(){
 		return varattu;
 	}
 
 	/**
+	 * Palauttaa true arvon, jos jonon koko ei ole 0
 	 * @return Palauttaa true arvon, jos jonon koko ei ole 0
 	 */
 	public boolean onJonossa(){

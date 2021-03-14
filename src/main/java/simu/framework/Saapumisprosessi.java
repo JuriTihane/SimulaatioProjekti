@@ -13,6 +13,7 @@ public class Saapumisprosessi {
 	private ContinuousGenerator lahdonViivastys = new Normal(3,2);
 
 	/**
+	 * Konstruktori
 	 * @param g Asettaa jakauman
 	 * @param tl Mihin tapahtumanlistaan saapumisprosessi sijoitetaan
 	 * @param tyyppi Minkä tyyppinen saapumisprosessi on, e.g. ARR1, DEP1, BUSARR, BUSDEP

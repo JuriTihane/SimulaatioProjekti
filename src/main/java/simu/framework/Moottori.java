@@ -21,7 +21,8 @@ public abstract class Moottori {
 	}
 
 	/**
-	 * @param aika Asettaa simulointiajan pituuden
+	 * Asettaa simulointiajan pituuden
+	 * @param aika aika
 	 */
 	public void setSimulointiaika(double aika) {
 		simulointiaika = aika;
@@ -61,14 +62,16 @@ public abstract class Moottori {
 	}
 
 	/**
-	 * @return Palauttaa seuraavan tapahtuman ajan
+	 * Palauttaa seuraavan tapahtuman ajan
+	 * @return double, seuraavan tapahtuman ajan
 	 */
 	private double nykyaika(){
 		return tapahtumalista.getSeuraavanAika();
 	}
 
 	/**
-	 * @return Palauttaa true jos kellon aika  ei ole isompi kuin simulointiaika, false jos on
+	 * Palauttaa true jos kellon aika ei ole isompi kuin simulointiaika, false jos on
+	 * @return boolean
 	 */
 	private boolean simuloidaan(){
 		return kello.getAika() < simulointiaika;
@@ -80,7 +83,8 @@ public abstract class Moottori {
 	protected abstract void alustukset(); // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
 
 	/**
-	 * @param t Määritellään simu.model-pakkauksessa Moottorin aliluokassa
+	 * Määritellään simu.model-pakkauksessa Moottorin aliluokassa
+	 * @param t Tapahtuma
 	 */
 	protected abstract void suoritaTapahtuma(Tapahtuma t);  // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
 

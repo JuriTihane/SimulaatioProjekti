@@ -16,7 +16,8 @@ public class Tapahtumalista {
 	}
 
 	/**
-	 * @return Palauttaa ensimmäisen Tapahtuman listalta, jonka poistetaan
+	 * Palauttaa ensimmäisen Tapahtuman listalta, jonka poistetaan
+	 * @return Tapahtuma
 	 */
 	public Tapahtuma poista(){
 		//Trace.out(Trace.Level.INFO,"Tapahtumalistasta poisto " + lista.peek());
@@ -32,7 +33,8 @@ public class Tapahtumalista {
 	}
 
 	/**
-	 * @return Palauttaa seuraavan tapahtumalistan tapahtuman ajan
+	 * Palauttaa seuraavan tapahtumalistan tapahtuman ajan
+	 * @return double
 	 */
 	public double getSeuraavanAika(){
 		return lista.peek().getAika();

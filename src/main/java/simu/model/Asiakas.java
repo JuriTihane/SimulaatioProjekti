@@ -41,29 +41,32 @@ public class Asiakas {
 	}
 
 	/**
-	 * @return Palauttaa Asiakasolion poistumisajan
+	 * Palauttaa Asiakasolion poistumisajan
+	 * @return Asiakasolion poistumisaika
 	 */
 	public double getPoistumisaika() {
 		return poistumisaika;
 	}
 
 	/**
-	 * @return Palauttaa Asiakasolion saapumisajan
+	 * Palauttaa Asiakasolion saapumisajan
+	 * @return Asiakasolion saapumisaika
 	 */
-
 	public double getSaapumisaika() {
 		return saapumisaika;
 	}
 
 	/**
-	 * @return Palauttaa Asiakasolion bussinumeron
+	 * Palauttaa Asiakasolion bussinumeron
+	 * @return Asiakasolion bussinumeron
 	 */
 	public int getBussiNumero(){
 		return bussiNumero;
 	}
 
 	/**
-	 * @return Palauttaa id:n eli == kokonaisasiakasmäärän
+	 * Palauttaa id:n eli == kokonaisasiakasmäärän
+	 * @return id eli == kokonaisasiakasmäärä
 	 */
 	public static int getId(){
 		return id;
