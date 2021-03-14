@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Asiakas luokka luo jokaiselle oliolle satunnaisen numeron, joka määrittää mihin bussiin asiakas
  * pyrkii. Id:tä käytetään kun halutaan halutaan tietää asiakkaiden kokonaismäärä.
- * Jokaisella asiakas oliolla on saapumisaika, poistumisaika, bussinumero ja id.
+ * Jokaisella asiakasoliolla on saapumisaika, poistumisaika, bussinumero ja id.
  */
 public class Asiakas {
 
@@ -33,24 +33,22 @@ public class Asiakas {
 	}
 
 	/**
-	 * Asetetaan uusi arvo Asiakas olion poistumisajalle
-	 * @param poistumisaika
+	 * Asetetaan uusi arvo Asiakasolion poistumisajalle
+	 * @param poistumisaika poistumis aika
 	 */
 	public void setPoistumisaika(double poistumisaika) {
 		this.poistumisaika = poistumisaika + ThreadLocalRandom.current().nextDouble(1, 10);
 	}
 
 	/**
-	 * Palauttaa Asiakas olion poistumisajan
-	 * @return
+	 * @return Palauttaa Asiakasolion poistumisajan
 	 */
 	public double getPoistumisaika() {
 		return poistumisaika;
 	}
 
 	/**
-	 * Palauttaa Asiakas olion saapumisajan
-	 * @return
+	 * @return Palauttaa Asiakasolion saapumisajan
 	 */
 
 	public double getSaapumisaika() {
@@ -58,23 +56,21 @@ public class Asiakas {
 	}
 
 	/**
-	 * Palauttaa Asiakas olion bussinumeron
-	 * @return
+	 * @return Palauttaa Asiakasolion bussinumeron
 	 */
 	public int getBussiNumero(){
 		return bussiNumero;
 	}
 
 	/**
-	 * Palauttaa id:n eli == kokonaisasiakasmäärän
-	 * @return
+	 * @return Palauttaa id:n eli == kokonaisasiakasmäärän
 	 */
 	public static int getId(){
 		return id;
 	}
 
 	/**
-	 * Kutsutaan kun Asiakas olio on poistunut listalta. Ilmoittaa konsoliin kokonaisasiakasmäärän ja odotusajan
+	 * Kutsutaan kun Asiakasolio on poistunut listalta. Ilmoittaa konsoliin kokonaisasiakasmäärän ja odotusajan
 	 */
 	public void raportti() {
 		System.out.println("Asiakas "+id+ " läpimenoaika:" + (poistumisaika - saapumisaika));

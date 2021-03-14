@@ -36,10 +36,10 @@ public class Palvelupiste {
 
 	/**
 	 * Konstruktori
-	 * @param generator
-	 * @param tapahtumalista
-	 * @param tyyppi
-	 * @param kapasiteetti
+	 * @param generator Palvelupisteen jakauma
+	 * @param tapahtumalista Mihin tapahtumalistaan
+	 * @param tyyppi Mikä tyyppi, e.g. ARR1, DEP1, BUSARR vai BUSDEP
+	 * @param kapasiteetti Bussin kapasiteetti
 	 */
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi, int kapasiteetti){
 		this.tapahtumalista = tapahtumalista;
@@ -49,8 +49,7 @@ public class Palvelupiste {
 	}
 
 	/**
-	 * Palauttaa matkustajat muuttujan arvon
-	 * @return
+	 * @return Palauttaa matkustajat muuttujan arvon
 	 */
 	public int getMatkustajat(){
 		return this.matkustajat;
@@ -58,15 +57,14 @@ public class Palvelupiste {
 
 	/**
 	 * Asettaa uuden arvon matkustajat muuttujalle
-	 * @param uusiArvo
+	 * @param uusiArvo Uusi arvo matkustajien määrälle
 	 */
 	public void setMatkustajat(int uusiArvo){
 		this.matkustajat = uusiArvo;
 	}
 
 	/**
-	 * Palauttaa valmisLahtoon muuttujan arvon
-	 * @return
+	 * @return Palauttaa valmisLahtoon muuttujan arvon
 	 */
 	public boolean getValmisLahtoon(){
 		return valmisLahtoon;
@@ -74,7 +72,7 @@ public class Palvelupiste {
 
 	/**
 	 * Asettaa uuden arvon valmisLahtoon muuttujalle
-	 * @param valmisLahtoon
+	 * @param valmisLahtoon true on valmis lähtöön, false ei ole valmis lähtöön
 	 */
 	public void setValmisLahtoon(boolean valmisLahtoon){
 		this.valmisLahtoon = valmisLahtoon;
@@ -82,15 +80,14 @@ public class Palvelupiste {
 
 	/**
 	 * Asettaa uuden arvon onPysakilla muuttujalle
-	 * @param onPysakilla
+	 * @param onPysakilla True jos on pysäkillä, false jos ei ole pysäkillä
 	 */
 	public void setOnPysakilla(boolean onPysakilla){
 		this.onPysakilla = onPysakilla;
 	}
 
 	/**
-	 * Palauttaa onPysakilla arvon
-	 * @return
+	 * @return Palauttaa onPysakilla arvon
 	 */
 	public boolean getOnPysakilla(){
 		return onPysakilla;
@@ -98,7 +95,7 @@ public class Palvelupiste {
 
 	/**
 	 * Asiakas olio lisätään jonoon mikäli kapasiteetti ei ole täynnä
-	 * @param a
+	 * @param a Asiakas olio
 	 */
 	public void lisaaJonoon(Asiakas a){ // Jonon 1. asiakas aina palvelussa
 		jono.add(a);
@@ -110,17 +107,16 @@ public class Palvelupiste {
 	}
 
 	/**
-	 * Linkedlist jonosta otetaan ensimmäinen jäsen ja se poistetaan listalta, jos varattu muuttujan arvo
-	 * on false
-	 * @return
+	 * Asetetaan varattu booleani false:ksi, Linkedlist jonosta otetaan ensimmäinen jäsen ja se poistetaan listalta
+	 * @return Linkedlist jonosta otettu ensimmäinen jäsen joka poistetaan
 	 */
-	public Asiakas otaJonosta(){  // Poistetaan palvelussa ollut
+	public Asiakas otaJonosta() {  // Poistetaan palvelussa ollut
 		varattu = false;
 		return jono.poll();
 	}
 
 	/**
-	 * varattu muuttujan ollessa arvon ollessa true generoidaan palveluaika ja lisätään uusi tapahtuma.
+	 * Varattu muuttuja asetetaan arvoksi true, generoidaan palveluaika ja lisätään uusi tapahtuma.
 	 */
 	public void aloitaPalvelu(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
 		varattu = true;
@@ -129,25 +125,22 @@ public class Palvelupiste {
 	}
 
 	/**
-	 * Olion kapasiteetille laitetaan uusi arvo
-	 * @param uusikapasiteetti
+	 * Olion kapasiteetille laitetaan uusi arvo, ei vielä käytössä
+	 * @param uusikapasiteetti Uusi bussin kapasiteetti
 	 */
-
 	public void setKapasiteettia (int uusikapasiteetti){
 		this.kapasiteetti = uusikapasiteetti;
 	}
 
 	/**
-	 * Palauttaa varattu muuttjan arvon
-	 * @return
+	 * @return Palauttaa varattu muuttjan arvon
 	 */
 	public boolean onVarattu(){
 		return varattu;
 	}
 
 	/**
-	 * Palauttaa true arvon, jos jonon koko on enemmän kuin 0
-	 * @return
+	 * @return Palauttaa true arvon, jos jonon koko ei ole 0
 	 */
 	public boolean onJonossa(){
 		return jono.size() != 0;

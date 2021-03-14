@@ -28,13 +28,12 @@ public class OmaMoottori extends Moottori{
 	private double odotusAjat;
 
 	/**
-	 * Konstruktorissa määritellään palvelupisteet lista johon laitetaan palvelupiste olioita.
+	 * Konstruktorissa määritellään palvelupisteet lista johon laitetaan palvelupisteolioita.
 	 * Luodaan kolme saapumisprosessia kattaen tapahtumatyypit(BUSARR, BUSDEP, ARR1)
 	 *
-	 * @param bussienMaara
-	 * @param bussienKapasiteetti
+	 * @param bussienMaara Kuinka monta bussia on simulaattorissa
+	 * @param bussienKapasiteetti Bussien kapasiteetti simulaattorissa
 	 */
-
 	public OmaMoottori(int bussienMaara, int bussienKapasiteetti){
 		OmaMoottori.bussienMaara = bussienMaara;
 
@@ -54,7 +53,6 @@ public class OmaMoottori extends Moottori{
 
 	/**
 	 * alustukset kutsuu olioiden saapumisprosessin ja bussiSaapumisprosessin metodia generoiSeuraava.
-	 *
 	 */
 	@Override
 	protected void alustukset() {
@@ -67,9 +65,9 @@ public class OmaMoottori extends Moottori{
 
 
 	/**
-	 * @param t
-	 * SuoritaTapahtuma luo uuden asiakas olion. Vertailee tapahtuma t olion tapahtumatyyppiä switch-lausekkeessa
+	 * SuoritaTapahtuma luo uuden asiakasolion. Vertailee tapahtuma t olion tapahtumatyyppiä switch-lausekkeessa
 	 * tapahtumatyyppi enumin tapahtumatyyppeihin.
+	 * @param t Tapahtuma t jonka suoritetaan
 	 */
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t) {
@@ -142,7 +140,7 @@ public class OmaMoottori extends Moottori{
 
 	/**
 	 * Palauttaa tulokset stringinä graafiseen käyttöliittymään
-	 * @return
+	 * @return Tulokset Stringina
 	 */
 	public String tuloksetGUI() {
 		double keskimaarainenMatkustajatBussi = 0;
