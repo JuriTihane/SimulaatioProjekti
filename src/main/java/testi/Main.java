@@ -66,6 +66,7 @@ public class Main extends Application {
                 m.setSimulointiaika(Double.parseDouble(setSimulointiaika.getText())); // Asetetaan aika, kuinka kauan simulaatio juoksee
                 m.aja(); // OmaMoottori.aja
                 ta.setText(m.tuloksetGUI());
+
             });
 
             StackPane stack = new StackPane(simulointiAikaText, setSimulointiaika, bussienMaaraText, setBussienMaara, bussienCapText, setCapMaara, ta, buttonStart);
