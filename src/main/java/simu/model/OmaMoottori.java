@@ -27,7 +27,13 @@ public class OmaMoottori extends Moottori{
 	private LinkedList<Double> test = new LinkedList<Double>();
 	private double odotusAjat;
 
-
+	/**
+	 * Konstruktorissa määritellään palvelupisteet lista johon laitetaan palvelupiste olioita.
+	 * Luodaan kolme saapumisprosessia kattaen tapahtumatyypit(BUSARR, BUSDEP, ARR1)
+	 *
+	 * @param bussienMaara
+	 * @param bussienKapasiteetti
+	 */
 
 	public OmaMoottori(int bussienMaara, int bussienKapasiteetti){
 		OmaMoottori.bussienMaara = bussienMaara;
@@ -47,7 +53,8 @@ public class OmaMoottori extends Moottori{
 
 
 	/**
-	 * alustukset kutsuu Saapumisprosessin metodia generoiSeuraava
+	 * alustukset kutsuu olioiden saapumisprosessin ja bussiSaapumisprosessin metodia generoiSeuraava.
+	 *
 	 */
 	@Override
 	protected void alustukset() {
@@ -133,6 +140,10 @@ public class OmaMoottori extends Moottori{
 		//System.out.println("Tulokset ... puuttuvat vielä");
 	}
 
+	/**
+	 * Palauttaa tulokset stringinä graafiseen käyttöliittymään
+	 * @return
+	 */
 	public String tuloksetGUI() {
 		double keskimaarainenMatkustajatBussi = 0;
 		for (int i = 0; i < test.size(); i++) {
