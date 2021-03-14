@@ -11,6 +11,9 @@ import simu.framework.Tapahtuma;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * OmaMoottori periytyy Moottori luokasta.
+ */
 public class OmaMoottori extends Moottori{
 
 	public static int matkustajienMaara;
@@ -23,6 +26,7 @@ public class OmaMoottori extends Moottori{
 	private LinkedList<Palvelupiste> prioriteettiJonoPalvelupisteille = new LinkedList<Palvelupiste>();
 	private LinkedList<Double> test = new LinkedList<Double>();
 	private double odotusAjat;
+
 
 
 	public OmaMoottori(int bussienMaara, int bussienKapasiteetti){
@@ -42,6 +46,9 @@ public class OmaMoottori extends Moottori{
 	}
 
 
+	/**
+	 * alustukset kutsuu Saapumisprosessin metodia generoiSeuraava
+	 */
 	@Override
 	protected void alustukset() {
 		// Ensimmäinen saapuminen järjestelmään
@@ -50,6 +57,13 @@ public class OmaMoottori extends Moottori{
 	}
 
 	// Suoritetaan tapahtuma t, määitellään Moottori.java
+
+
+	/**
+	 * @param t
+	 * SuoritaTapahtuma luo uuden asiakas olion. Vertailee tapahtuma t olion tapahtumatyyppiä switch-lausekkeessa
+	 * tapahtumatyyppi enumin tapahtumatyyppeihin.
+	 */
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t) {
 		// Luodaan uusi asiakas
@@ -108,12 +122,15 @@ public class OmaMoottori extends Moottori{
 		}
 	}
 
+	/**
+	 * Tulostaa simulaation tuloksia konsoliin
+	 */
 	@Override
 	protected void tulokset() {
 		System.out.println("Kaikki asiakkaat yhteensä " + Asiakas.getId());
 		System.out.println("Keskimääräinen odotusaika asiakkailla " + (double)Asiakas.getId() / odotusAjat);
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
-		System.out.println("Tulokset ... puuttuvat vielä");
+		//System.out.println("Tulokset ... puuttuvat vielä");
 	}
 
 	public String tuloksetGUI() {

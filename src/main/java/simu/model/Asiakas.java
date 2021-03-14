@@ -7,6 +7,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 // TODO:
 // Asiakas koodataan simulointimallin edellyttämällä tavalla (data!)
+
+
+/**
+ * Asiakas luokka luo jokaiselle oliolle satunnaisen numeron, joka määrittää mihin bussiin asiakas
+ * pyrkii.
+ */
 public class Asiakas {
 
 	private double saapumisaika;
